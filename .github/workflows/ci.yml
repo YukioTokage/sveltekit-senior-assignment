@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: 🧩 Generate Paraglide files
-        run: npx paraglide-js compile --project ./project.inlang/settings.json
+        run: npx paraglide-js compile --project ./project.inlang
 
       - name: 🧹 Lint (ESLint & Prettier)
         run: npm run lint
