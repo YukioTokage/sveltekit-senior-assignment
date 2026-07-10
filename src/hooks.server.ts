@@ -1,9 +1,9 @@
-import type { Handle } from '@sveltejs/kit';
-import { getTextDirection } from '$lib/paraglide/runtime';
+import type { Handle, Reroute } from '@sveltejs/kit';
+import { getTextDirection, deLocalizeUrl } from '$lib/paraglide/runtime';
 import { paraglideMiddleware } from '$lib/paraglide/server';
 
-const handleParaglide: Handle = ({ event, resolve }) =>
-	paraglideMiddleware(event.request, ({ request, locale }) => {
+export const handle: Handle = ({ event, resolve }) => {
+	return paraglideMiddleware(event.request, ({ request, locale }) => {
 		event.request = request;
 
 		return resolve(event, {
@@ -13,5 +13,8 @@ const handleParaglide: Handle = ({ event, resolve }) =>
 					.replace('%paraglide.dir%', getTextDirection(locale))
 		});
 	});
+};
 
-export const handle: Handle = handleParaglide;
+export const reroute: Reroute = ({ url }) => {
+	return deLocalizeUrl(url).pathname;
+};
