@@ -10,3 +10,4 @@ bun.lockb
 
 src/lib/paraglide/
 project.inlang/
+src/lib/server/mocks/
