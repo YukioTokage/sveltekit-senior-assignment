@@ -56,5 +56,8 @@
 		"*.{json,css,html,md}": [
 			"prettier --write"
 		]
+	},
+	"dependencies": {
+		"zod": "^4.4.3"
 	}
 }

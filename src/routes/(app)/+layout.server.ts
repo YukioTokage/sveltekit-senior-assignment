@@ -1,15 +1,17 @@
 import { redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
+import { getLocale } from '$lib/paraglide/runtime';
 
-export const load: LayoutServerLoad = async ({ cookies, url, params }) => {
+export const load: LayoutServerLoad = async ({ cookies, url }) => {
 	const session = cookies.get('session');
 
 	if (!session) {
-		const langPrefix = params.lang ? `/${params.lang}` : '';
+		const lang = getLocale();
+		const langPrefix = lang !== 'en' ? `/${lang}` : '';
 
 		const redirectTo = url.pathname;
 
-		redirect(302, `${langPrefix}/login?redirectTo=${redirectTo}`);
+		throw redirect(302, `${langPrefix}/login?redirectTo=${redirectTo}`);
 	}
 
 	return {

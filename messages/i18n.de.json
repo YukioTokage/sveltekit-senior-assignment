@@ -39,5 +39,12 @@
 	"common.retry": "Erneut versuchen",
 	"common.save": "Speichern",
 	"common.cancel": "Abbrechen",
-	"footer.copy": "© 2026 Demo Co."
+	"footer.copy": "© 2026 Demo Co.",
+	"error.global_tag": "Fehler",
+	"error.fallback": "Etwas ist schiefgelaufen",
+	"error.go_home": "Zur Startseite",
+	"error.dashboard.title": "Dashboard-Fehler",
+	"error.dashboard.fallback": "Daten konnten nicht geladen werden.",
+	"error.btn.refresh": "Seite aktualisieren",
+	"error.btn.dashboard": "Zum Dashboard"
 }

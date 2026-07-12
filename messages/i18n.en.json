@@ -39,5 +39,12 @@
 	"common.retry": "Try again",
 	"common.save": "Save",
 	"common.cancel": "Cancel",
-	"footer.copy": "© 2026 Demo Co."
+	"footer.copy": "© 2026 Demo Co.",
+	"error.global_tag": "Error",
+	"error.fallback": "Something went wrong",
+	"error.go_home": "Go Home",
+	"error.dashboard.title": "Dashboard Error",
+	"error.dashboard.fallback": "Failed to load data.",
+	"error.btn.refresh": "Refresh Page",
+	"error.btn.dashboard": "To Dashboard"
 }
