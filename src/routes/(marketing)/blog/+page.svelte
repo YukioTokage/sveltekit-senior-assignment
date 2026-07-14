@@ -10,9 +10,9 @@
 	let { data }: { data: PageData } = $props();
 	let currentLang = $derived(getLocale());
 
-	let posts = $state<LocalizedPost[]>(data.initialPosts);
+	let posts = $derived<LocalizedPost[]>(data.initialPosts);
 	let page = $state(1);
-	let hasMore = $state(data.initialHasMore);
+	let hasMore = $derived(data.initialHasMore);
 	let isLoading = $state(false);
 
 	async function loadMore() {

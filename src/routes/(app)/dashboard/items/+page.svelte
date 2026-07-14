@@ -13,7 +13,7 @@
 	import Dialog from '$lib/components/layout/Dialog.svelte';
 
 	let { data } = $props();
-	let items = $state(data.items);
+	let items = $derived(data.items);
 
 	let isDeleteDialogOpen = $state(false);
 	let itemToDelete = $state<string | null>(null);

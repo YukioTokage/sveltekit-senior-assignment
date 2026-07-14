@@ -11,7 +11,7 @@
 	let { value = '', onsave, oncancel, class: className = '' }: Props = $props();
 
 	let isEditing = $state(false);
-	let editValue = $state(value);
+	let editValue = $derived(value);
 	let inputRef: HTMLInputElement | undefined = $state();
 
 	$effect(() => {
