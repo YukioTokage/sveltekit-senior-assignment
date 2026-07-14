@@ -1,4 +1,3 @@
-// src/lib/i18n.ts
 import { resolve } from '$app/paths';
 import type { Pathname, PathnameWithSearchOrHash } from '$app/types';
 import { localizeHref } from '$lib/paraglide/runtime';

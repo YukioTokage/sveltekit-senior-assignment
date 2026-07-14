@@ -5,13 +5,13 @@
 	import { locales, localizeHref } from '$lib/paraglide/runtime';
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
-	import Button from '$lib/components/primitives/Button.svelte';
-	import InlineInput from '$lib/components/controls/inputs/InlineInput.svelte';
-	import CustomInput from '$lib/components/controls/inputs/CustomInput.svelte';
-	import Badge from '$lib/components/primitives/Badge.svelte';
-	import Card from '$lib/components/layout/Card.svelte';
-	import Checkbox from '$lib/components/controls/inputs/Checkbox.svelte';
-	import Select from '$lib/components/controls/inputs/Select.svelte';
+	// import Button from '$lib/components/primitives/Button.svelte';
+	// import InlineInput from '$lib/components/controls/inputs/InlineInput.svelte';
+	// import CustomInput from '$lib/components/controls/inputs/CustomInput.svelte';
+	// import Badge from '$lib/components/primitives/Badge.svelte';
+	// import Card from '$lib/components/layout/Card.svelte';
+	// import Checkbox from '$lib/components/controls/inputs/Checkbox.svelte';
+	// import Select from '$lib/components/controls/inputs/Select.svelte';
 
 	let { children } = $props();
 </script>
@@ -20,7 +20,7 @@
 
 {@render children()}
 
-<Button variant="default" onclick={() => console.log('Клік')}>Зберегти</Button>
+<!-- <Button variant="default" onclick={() => console.log('Клік')}>Зберегти</Button>
 
 <Button variant="outline" href="/dashboard">До панелі керування</Button>
 
@@ -47,7 +47,7 @@
 	<option value="option1">Опція 1</option>
 	<option value="option2">Опція 2</option>
 	<option value="option3">Опція 3</option>
-</Select>
+</Select> -->
 
 <div style="display:none">
 	{#each locales as locale (locale)}
