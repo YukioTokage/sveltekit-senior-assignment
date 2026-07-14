@@ -60,6 +60,12 @@ export type Item = z.infer<typeof itemSchema>;
 export type Post = z.infer<typeof postSchema>;
 export type Tag = z.infer<typeof tagSchema>;
 
+export type LocalizedPost = Omit<Post, 'translations'> & {
+	title: string;
+	excerpt: string;
+	body?: string;
+};
+
 export const usersFileSchema = z.array(userSchema);
 export const itemsFileSchema = z.array(itemSchema);
 export const postsFileSchema = z.array(postSchema);
