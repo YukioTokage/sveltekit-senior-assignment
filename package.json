@@ -58,6 +58,7 @@
 		]
 	},
 	"dependencies": {
+		"isomorphic-dompurify": "^3.18.0",
 		"zod": "^4.4.3"
 	}
 }

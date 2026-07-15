@@ -25,7 +25,7 @@
 			const res = await fetch(`/api/posts?page=${page}&limit=6&lang=${currentLang}`);
 			const newData = await res.json();
 
-			posts.push(...newData.posts);
+			posts = [...posts, ...newData.posts];
 			hasMore = newData.hasMore;
 		} catch (error) {
 			console.error('Failed to load more posts:', error);

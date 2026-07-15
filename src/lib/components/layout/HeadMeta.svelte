@@ -13,6 +13,7 @@
 		imageHeight?: string;
 		schemaData?: Record<string, unknown> | null;
 		enableNoIndex?: boolean;
+		ogType?: 'website' | 'article' | 'profile';
 	}
 
 	let {
@@ -24,7 +25,8 @@
 		imageWidth = '1200',
 		imageHeight = '630',
 		schemaData = null,
-		enableNoIndex = false
+		enableNoIndex = false,
+		ogType = 'website'
 	}: Props = $props();
 
 	let origin = $derived(page.url.origin);
@@ -61,7 +63,7 @@
 		href="{origin}{localizeHref(pathname, { locale: 'en' })}"
 	/>
 
-	<meta property="og:type" content="website" />
+	<meta property="og:type" content={ogType} />
 	<meta property="og:url" content={canonicalUrl} />
 	<meta property="og:title" content={finalTitle} />
 	<meta property="og:description" content={finalDescription} />

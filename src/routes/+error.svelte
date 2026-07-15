@@ -2,8 +2,6 @@
 	import { page } from '$app/state';
 	import * as m from '$lib/paraglide/messages.js';
 	import { localizedResolve } from '$lib/utils/route';
-
-	// TODO: Develop layout
 </script>
 
 <div class="flex min-h-screen items-center justify-center bg-background p-4">
