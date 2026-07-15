@@ -12,6 +12,7 @@
 >
 	<div class="w-full">
 		<div class="flex flex-wrap gap-2 mb-4">
+			<!-- TODO: Use Badge.svelte -->
 			{#each post.tags as tag (tag)}
 				<span
 					class="inline-flex items-center rounded-md bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary"
