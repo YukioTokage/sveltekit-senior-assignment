@@ -17,6 +17,7 @@
 	import CreateDashboardItemDialog from '$lib/components/modals/CreateDashboardItemDialog.svelte';
 	import ErrorDialog from '$lib/components/modals/ErrorDialog.svelte';
 	import PlusIcon from '$lib/components/icons/PlusIcon.svelte';
+	import TableToolbar from '$lib/components/collections/tables/dashboard/TableToolbar.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -48,6 +49,8 @@
 			</Button>
 		{/if}
 	</div>
+
+	<TableToolbar />
 
 	<div
 		class="rounded-xl border border-border bg-card overflow-hidden shadow-sm w-full overflow-x-auto"
