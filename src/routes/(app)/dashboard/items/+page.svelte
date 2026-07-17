@@ -1,87 +1,89 @@
 <script lang="ts">
+	import type { PageData } from './$types';
+	import type { ErrorState } from '$lib/schemas/dashboard';
+	import * as m from '$lib/paraglide/messages.js';
+
 	import Table from '$lib/components/collections/tables/Table.svelte';
-	import TableHeader from '$lib/components/collections/tables/TableHeader.svelte';
 	import TableBody from '$lib/components/collections/tables/TableBody.svelte';
 	import TableRow from '$lib/components/collections/tables/TableRow.svelte';
-	import TableHead from '$lib/components/collections/tables/TableHead.svelte';
 	import TableCell from '$lib/components/collections/tables/TableCell.svelte';
-
-	import Badge from '$lib/components/primitives/Badge.svelte';
-	import InlineInput from '$lib/components/controls/inputs/InlineInput.svelte';
+	import Pagination from '$lib/components/collections/tables/Pagination.svelte';
+	import PaginationSkeleton from '$lib/components/collections/tables/PaginationSkeleton.svelte';
+	import TableRowSkeleton from '$lib/components/collections/tables/dashboard/TableRowSkeleton.svelte';
+	import TableHeaderWithContent from '$lib/components/collections/tables/dashboard/TableHeaderWithContent.svelte';
+	import TableRowWithContent from '$lib/components/collections/tables/dashboard/TableRowWithContent.svelte';
 
 	import Button from '$lib/components/primitives/Button.svelte';
-	import Dialog from '$lib/components/layout/Dialog.svelte';
+	import CreateDashboardItemDialog from '$lib/components/modals/CreateDashboardItemDialog.svelte';
+	import ErrorDialog from '$lib/components/modals/ErrorDialog.svelte';
+	import PlusIcon from '$lib/components/icons/PlusIcon.svelte';
 
-	let { data } = $props();
-	let items = $derived(data.items);
+	let { data }: { data: PageData } = $props();
 
-	let isDeleteDialogOpen = $state(false);
-	let itemToDelete = $state<string | null>(null);
+	const role = $derived(data.session?.user?.role || 'viewer');
 
-	function confirmDelete() {
-		// TODO: Implement delete logic
-		console.log('Deleting:', itemToDelete);
-		isDeleteDialogOpen = false;
-	}
+	let error = $state<ErrorState>({
+		errorDialogOpen: false,
+		errorMessage: '',
+		fieldErrors: {},
+		isCreateDialogOpen: false
+	});
 </script>
 
-<Button
-	variant="destructive"
-	onclick={() => {
-		itemToDelete = 'Company 1';
-		isDeleteDialogOpen = true;
-	}}
->
-	Delete company
-</Button>
-
-<Dialog bind:open={isDeleteDialogOpen} title="Confirm action">
-	<p class="text-sm text-muted-foreground">
-		Are you sure you want to delete <strong>{itemToDelete}</strong>? This action cannot be undone.
-	</p>
-
-	<div class="mt-6 flex justify-end gap-3">
-		<Button variant="outline" onclick={() => (isDeleteDialogOpen = false)}>Cancel</Button>
-		<Button variant="destructive" onclick={confirmDelete}>Yes, delete</Button>
+<div class="space-y-6">
+	<div class="flex items-start md:items-center flex-col md:flex-row justify-between">
+		<h1 class="text-3xl font-bold tracking-tight text-foreground">
+			{m['dashboard.items.title']()}
+		</h1>
+		{#if role === 'admin'}
+			<Button
+				class="gap-2 shadow-sm mt-4 md:mt-0"
+				onclick={() => {
+					error.fieldErrors = {};
+					error.isCreateDialogOpen = true;
+				}}
+			>
+				<PlusIcon />
+				{m['dashboard.items.new']()}
+			</Button>
+		{/if}
 	</div>
-</Dialog>
 
-<Table>
-	<TableHeader>
-		<TableRow>
-			<TableHead class="w-25">ID</TableHead>
-			<TableHead>Company name</TableHead>
-			<TableHead>Status</TableHead>
-			<TableHead class="text-right">Budget</TableHead>
-		</TableRow>
-	</TableHeader>
+	<div
+		class="rounded-xl border border-border bg-card overflow-hidden shadow-sm w-full overflow-x-auto"
+	>
+		<Table class="min-w-300">
+			<TableHeaderWithContent />
 
-	<TableBody>
-		{#each items as item (item.id)}
-			<TableRow>
-				<TableCell class="font-medium">{item.id}</TableCell>
-
-				<TableCell>
-					<InlineInput
-						value={item.name}
-						onsave={(val) => {
-							item.name = val; /* TODO: Implement save functionality */
-						}}
-					/>
-				</TableCell>
-
-				<TableCell>
-					{#if item.status === 'active'}
-						<Badge variant="success">Active</Badge>
-					{:else if item.status === 'paused'}
-						<Badge variant="warning">Paused</Badge>
+			<TableBody
+				>{#await data.itemsPayload}
+					{#each [1, 2, 3, 4, 5] as skeletonIndex (skeletonIndex)}
+						<TableRowSkeleton />
+					{/each}
+				{:then resolved}
+					{#if resolved.data.length === 0}
+						<TableRow>
+							<TableCell colspan={12} class="h-32 text-center text-muted-foreground">
+								{m['dashboard.items.empty']()}
+							</TableCell>
+						</TableRow>
 					{:else}
-						<Badge variant="secondary">Completed</Badge>
+						{#each resolved.data as item (item.id)}
+							<TableRowWithContent {item} {role} bind:error />
+						{/each}
 					{/if}
-				</TableCell>
+				{/await}
+			</TableBody>
+		</Table>
+	</div>
 
-				<TableCell class="text-right">${item.budget}</TableCell>
-			</TableRow>
-		{/each}
-	</TableBody>
-</Table>
+	{#await data.itemsPayload}
+		<PaginationSkeleton />
+	{:then resolved}
+		<Pagination meta={resolved.meta} />
+	{/await}
+</div>
+
+<CreateDashboardItemDialog bind:error />
+
+<ErrorDialog bind:error />

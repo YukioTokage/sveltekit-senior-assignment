@@ -2,6 +2,7 @@
 	import { formatDate } from '$lib/utils/formatters';
 	import type { LocalizedPost } from '$lib/schemas';
 	import { localizedResolve } from '$lib/utils/route.js';
+	import ClockIcon from '$lib/components/icons/ClockIcon.svelte';
 
 	let { post }: { post: LocalizedPost } = $props();
 </script>
@@ -12,7 +13,6 @@
 >
 	<div class="w-full">
 		<div class="flex flex-wrap gap-2 mb-4">
-			<!-- TODO: Use Badge.svelte -->
 			{#each post.tags as tag (tag)}
 				<span
 					class="inline-flex items-center rounded-md bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary"
@@ -40,19 +40,7 @@
 		<div class="flex items-center gap-x-4 text-xs text-muted-foreground">
 			<time datetime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
 			<span class="flex items-center gap-1">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="14"
-					height="14"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					class="lucide lucide-clock"
-					><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg
-				>
+				<ClockIcon />
 				{post.readingTimeMinutes} min
 			</span>
 		</div>

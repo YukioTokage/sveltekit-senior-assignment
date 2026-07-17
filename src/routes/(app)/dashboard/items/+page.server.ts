@@ -1,7 +1,7 @@
-import { getItems, updateItem } from '$lib/server/api/items';
+import { getItems, updateItem, createItem } from '$lib/server/api/items';
 import { fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
-import { itemSchema, type Item } from '$lib/schemas';
+import { itemSchema, type Item, type User } from '$lib/schemas';
 
 export const load: PageServerLoad = async ({ url, depends }) => {
 	depends('app:items');
@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ url, depends }) => {
 	const sortBy = (url.searchParams.get('sortBy') || 'updatedAt') as keyof Item;
 	const sortOrder = (url.searchParams.get('sortOrder') || 'desc') as 'asc' | 'desc';
 
-	const { data, meta } = await getItems({
+	const itemsPromise = getItems({
 		page,
 		limit,
 		status,
@@ -23,13 +23,20 @@ export const load: PageServerLoad = async ({ url, depends }) => {
 	});
 
 	return {
-		items: data,
-		meta
+		itemsPayload: itemsPromise
 	};
 };
 
 export const actions: Actions = {
-	update: async ({ request }) => {
+	update: async ({ request, cookies }) => {
+		const session = cookies.get('session');
+		if (!session) return fail(401, { error: 'Unauthorized' });
+		const user: Omit<User, 'password'> = JSON.parse(session);
+
+		if (user.role !== 'admin' && user.role !== 'editor') {
+			return fail(403, { error: 'Forbidden: You do not have permission to edit items.' });
+		}
+
 		const formData = await request.formData();
 		const id = formData.get('id');
 
@@ -68,6 +75,75 @@ export const actions: Actions = {
 			return { success: true };
 		} catch {
 			return fail(404, { error: 'Item not found' });
+		}
+	},
+
+	create: async ({ request, cookies }) => {
+		const session = cookies.get('session');
+		if (!session) return fail(401, { error: 'Unauthorized' });
+		const user: Omit<User, 'password'> = JSON.parse(session);
+
+		if (user.role !== 'admin') {
+			return fail(403, { error: 'Forbidden: Only administrators can create new items.' });
+		}
+
+		const formData = await request.formData();
+
+		const impressions = Number(formData.get('impressions')) || 0;
+		const clicks = Number(formData.get('clicks')) || 0;
+		const ctr = impressions > 0 ? clicks / impressions : 0;
+
+		const rawTags = (formData.get('tags') as string) || '';
+		const tags = rawTags
+			.split(',')
+			.map((t) => t.trim())
+			.filter((t) => t.length > 0);
+
+		const rawData = {
+			id: crypto.randomUUID(),
+			name: formData.get('name'),
+			status: formData.get('status'),
+			channel: formData.get('channel'),
+			owner: {
+				id: 'usr-admin-01',
+				name: 'Admin User'
+			},
+			budget: Number(formData.get('budget')) || 0,
+			spent: Number(formData.get('spent')) || 0,
+			impressions,
+			clicks,
+			ctr,
+			startDate: formData.get('startDate'),
+			endDate: formData.get('endDate'),
+			updatedAt: new Date().toISOString(),
+			tags
+		};
+
+		const validation = itemSchema.safeParse(rawData);
+
+		if (!validation.success) {
+			const fieldErrors = validation.error.issues.reduce(
+				(acc, issue) => {
+					const fieldName = issue.path[0] as string;
+					if (fieldName) {
+						acc[fieldName] = issue.message;
+					}
+					return acc;
+				},
+				{} as Record<string, string>
+			);
+
+			return fail(400, {
+				error: 'Form validation failed',
+				details: fieldErrors
+			});
+		}
+
+		try {
+			await createItem(validation.data);
+			return { success: true };
+		} catch {
+			return fail(500, { error: 'Failed to write into database storage' });
 		}
 	}
 };

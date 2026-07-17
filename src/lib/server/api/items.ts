@@ -86,3 +86,8 @@ export async function updateItem(id: string, updates: Partial<Item>) {
 
 	return dbItems[index];
 }
+
+export async function createItem(item: Item): Promise<Item> {
+	dbItems.unshift(item);
+	return item;
+}

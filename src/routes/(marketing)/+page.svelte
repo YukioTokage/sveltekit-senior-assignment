@@ -2,6 +2,9 @@
 	import HeadMeta from '$lib/components/layout/HeadMeta.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import Button from '$lib/components/primitives/Button.svelte';
+	import LightningIcon from '$lib/components/icons/LightningIcon.svelte';
+	import WandIcon from '$lib/components/icons/WandIcon.svelte';
+	import LockIcon from '$lib/components/icons/LockIcon.svelte';
 </script>
 
 <HeadMeta title={m['home.meta.title']()} description={m['home.meta.description']()} />
@@ -33,17 +36,7 @@
 				class="flex flex-col items-center text-center rounded-lg border bg-card p-6 shadow-sm"
 			>
 				<div class="mb-4 rounded-full bg-primary/10 p-3 text-primary">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg
-					>
+					<LightningIcon />
 				</div>
 				<h3 class="text-xl font-bold">{m['feature.fast.title']()}</h3>
 				<p class="mt-2 text-muted-foreground">
@@ -55,22 +48,7 @@
 				class="flex flex-col items-center text-center rounded-lg border bg-card p-6 shadow-sm"
 			>
 				<div class="mb-4 rounded-full bg-primary/10 p-3 text-primary">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						><path
-							d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"
-						/><path d="m14 7 3 3" /><path d="M5 6v4" /><path d="M19 14v4" /><path
-							d="M10 2v2"
-						/><path d="M7 8H3" /><path d="M21 16h-4" /><path d="M11 3H9" /></svg
-					>
+					<WandIcon />
 				</div>
 				<h3 class="text-xl font-bold">{m['feature.i18n.title']()}</h3>
 				<p class="mt-2 text-muted-foreground">
@@ -82,20 +60,7 @@
 				class="flex flex-col items-center text-center rounded-lg border bg-card p-6 shadow-sm"
 			>
 				<div class="mb-4 rounded-full bg-primary/10 p-3 text-primary">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path
-							d="M7 11V7a5 5 0 0 1 10 0v4"
-						/></svg
-					>
+					<LockIcon />
 				</div>
 				<h3 class="text-xl font-bold">{m['feature.secure.title']()}</h3>
 				<p class="mt-2 text-muted-foreground">

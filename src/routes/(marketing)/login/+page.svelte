@@ -18,15 +18,16 @@
 		<div class="text-center mb-8">
 			<h1 class="text-3xl font-bold text-foreground">{m['login.title']()}</h1>
 			<p class="text-sm text-muted-foreground mt-2">
-				Use <span class="font-mono bg-muted px-1 rounded">admin@demo.test</span>,
-				<span class="font-mono bg-muted px-1 rounded">editor</span>, or
+				{m['common.use']()} <span class="font-mono bg-muted px-1 rounded">admin@demo.test</span>,
+				<span class="font-mono bg-muted px-1 rounded">editor</span>, {m['common.or']()}
 				<span class="font-mono bg-muted px-1 rounded">viewer</span>.
-				<br />Password: <span class="font-mono bg-muted px-1 rounded">demo1234</span>
+				<br />{m['login.password']()}: <span class="font-mono bg-muted px-1 rounded">demo1234</span>
 			</p>
 		</div>
 
 		<form
 			method="POST"
+			action="?/login"
 			class="space-y-6"
 			use:enhance={() => {
 				isSubmitting = true;

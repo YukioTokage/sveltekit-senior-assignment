@@ -5,6 +5,8 @@
 	import { locales, getLocale } from '$lib/paraglide/runtime.js';
 	import { localizedResolve } from '$lib/utils/route.js';
 	import { disableSelfLink } from '$lib/directive/disableSelfLink.svelte.js';
+	import ThemeToggle from '$lib/components/primitives/ThemeToggle.svelte';
+	import BurgerIcon from '$lib/components/icons/BurgerIcon.svelte';
 
 	let pathname = $derived(page.url.pathname);
 	let currentLang = $derived(getLocale());
@@ -70,7 +72,7 @@
 
 		<div class="flex items-center gap-4">
 			<div
-				class="flex items-center rounded-md border bg-muted/50 p-1"
+				class="hidden sm:flex items-center rounded-md border bg-muted/50 p-1"
 				aria-label="Language switcher"
 			>
 				{#each locales as locale (locale)}
@@ -97,6 +99,8 @@
 				{m['nav.dashboard']()}
 			</a>
 
+			<ThemeToggle />
+
 			<button
 				type="button"
 				class="inline-flex md:hidden items-center justify-center rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
@@ -105,21 +109,7 @@
 				aria-label="Toggle menu"
 				onclick={openMenu}
 			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				>
-					<line x1="4" x2="20" y1="12" y2="12" />
-					<line x1="4" x2="20" y1="6" y2="6" />
-					<line x1="4" x2="20" y1="18" y2="18" />
-				</svg>
+				<BurgerIcon />
 			</button>
 		</div>
 	</div>

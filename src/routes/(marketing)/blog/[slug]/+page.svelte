@@ -6,6 +6,9 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import { localizedResolve } from '$lib/utils/route.js';
 	import { disableSelfLink } from '$lib/directive/disableSelfLink.svelte.js';
+	import ClockIcon from '$lib/components/icons/ClockIcon.svelte';
+	import CalendarIcon from '$lib/components/icons/CalendarIcon.svelte';
+	import ArrowLeftIcon from '$lib/components/icons/ArrowLeftIcon.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -70,38 +73,11 @@
 
 			<div class="flex items-center gap-4 text-xs">
 				<time datetime={post.publishedAt} class="flex items-center gap-1">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="14"
-						height="14"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						><rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line
-							x1="16"
-							x2="16"
-							y1="2"
-							y2="6"
-						/><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /></svg
-					>
+					<CalendarIcon />
 					{formatDate(post.publishedAt)}
 				</time>
 				<span class="flex items-center gap-1">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="14"
-						height="14"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg
-					>
+					<ClockIcon />
 					{formatNumber(post.readingTimeMinutes)} min read
 				</span>
 			</div>
@@ -118,19 +94,7 @@
 				use:disableSelfLink
 				class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline group"
 			>
-				<svg
-					class="transition-transform group-hover:-translate-x-1"
-					xmlns="http://www.w3.org/2000/svg"
-					width="16"
-					height="14"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					><line x1="19" x2="5" y1="12" y2="12" /><polyline points="12 19 5 12 12 5" /></svg
-				>
+				<ArrowLeftIcon />
 				{m['blog.backToPublications']()}
 			</a>
 		</div>

@@ -11,18 +11,12 @@
 	let { value = '', onsave, oncancel, class: className = '' }: Props = $props();
 
 	let isEditing = $state(false);
-	let editValue = $derived(value);
+	let editValue = $state('');
 	let inputRef: HTMLInputElement | undefined = $state();
 
-	$effect(() => {
-		if (!isEditing) {
-			editValue = value;
-		}
-	});
-
 	async function startEditing() {
-		isEditing = true;
 		editValue = value;
+		isEditing = true;
 
 		await tick();
 		inputRef?.focus();

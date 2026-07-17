@@ -21,7 +21,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
 };
 
 export const actions: Actions = {
-	default: async ({ request, cookies, url }) => {
+	login: async ({ request, cookies, url }) => {
 		const formData = await request.formData();
 		const email = formData.get('email');
 		const password = formData.get('password');
@@ -74,5 +74,14 @@ export const actions: Actions = {
 		}
 
 		throw redirect(303, `${prefix}/dashboard`);
+	},
+
+	logout: async ({ cookies }) => {
+		cookies.delete('session', { path: '/' });
+
+		const lang = getLocale();
+		const langPrefix = lang !== 'en' ? `/${lang}` : '';
+
+		throw redirect(303, `${langPrefix}/login`);
 	}
 };
