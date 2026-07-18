@@ -4,7 +4,7 @@
 			"startServerCommand": "npm run preview",
 			"startServerReadyPattern": "Local:",
 			"startServerReadyTimeout": 20000,
-			"puppeteerScript": "./scripts/lhci-auth.js",
+			"puppeteerScript": "./scripts/lhci-auth.cjs",
 			"puppeteerLaunchOptions": {
 				"args": ["--no-sandbox", "--disable-dev-shm-usage"]
 			},
