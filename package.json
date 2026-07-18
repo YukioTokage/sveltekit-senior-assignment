@@ -69,7 +69,7 @@
 	},
 	"size-limit": [
 		{
-			"path": "dist/**/*.js",
+			"path": ".vercel/output/**/*.js",
 			"limit": "80 KB"
 		}
 	]
