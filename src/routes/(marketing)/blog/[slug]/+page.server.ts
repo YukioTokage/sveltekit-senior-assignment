@@ -5,6 +5,8 @@ import { getLocale } from '$lib/paraglide/runtime.js';
 import * as m from '$lib/paraglide/messages.js';
 import DOMPurify from 'isomorphic-dompurify';
 
+export const prerender = true;
+
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
 	const currentLang = getLocale() as 'en' | 'de';

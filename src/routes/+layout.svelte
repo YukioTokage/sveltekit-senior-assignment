@@ -3,6 +3,8 @@
 	import Loader from '$lib/components/layout/Loader.svelte';
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
+	import { onMount } from 'svelte';
+	import { onCLS, onINP, onLCP, onTTFB, type Metric } from 'web-vitals';
 
 	let { children } = $props();
 
@@ -18,6 +20,23 @@
 		} else {
 			showLoader = false;
 		}
+	});
+
+	onMount(() => {
+		function sendToAnalytics(metric: Metric) {
+			const body = JSON.stringify(metric);
+
+			if (navigator.sendBeacon) {
+				navigator.sendBeacon('/api/beacon', body);
+			} else {
+				fetch('/api/beacon', { body, method: 'POST', keepalive: true });
+			}
+		}
+
+		onCLS(sendToAnalytics);
+		onINP(sendToAnalytics);
+		onLCP(sendToAnalytics);
+		onTTFB(sendToAnalytics);
 	});
 </script>
 

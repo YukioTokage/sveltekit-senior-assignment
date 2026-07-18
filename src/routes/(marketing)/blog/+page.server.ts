@@ -1,6 +1,8 @@
 import type { PageServerLoad } from './$types';
 import { getLocale } from '$lib/paraglide/runtime.js';
 
+export const prerender = true;
+
 export const load: PageServerLoad = async ({ fetch }) => {
 	const currentLang = getLocale();
 	const limit = 6;
