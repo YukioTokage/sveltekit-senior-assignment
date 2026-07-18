@@ -1,0 +1,16 @@
+{
+	"ci": {
+		"collect": {
+			"staticDistDir": "./build",
+			"url": ["http://localhost:4173/"]
+		},
+		"assert": {
+			"preset": "lighthouse:recommended",
+			"assertions": {
+				"largest-contentful-paint": ["error", { "maxNumericValue": 2500 }],
+				"cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }],
+				"interactive": ["error", { "maxNumericValue": 3000 }]
+			}
+		}
+	}
+}

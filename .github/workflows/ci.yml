@@ -40,18 +40,13 @@ jobs:
       - name: 🏗️ Build Project
         run: npm run build
 
-      - name: 🌐 Install Playwright Browsers
-        run: npx playwright install --with-deps
-
       - name: 🎭 E2E Tests (Playwright)
         run: npm run test:e2e
 
       - name: ⚖️ Check Bundle Size (< 80KB limit)
         run: |
-          # npx size-limit
-      # TODO: CI size-limit check
+          npx size-limit
+
       - name: 🚀 Lighthouse CI (Performance Budgets)
         run: |
-          # npx lhci autorun
-
-# TODO: CI Lighthouse check
+          npx lhci autorun
