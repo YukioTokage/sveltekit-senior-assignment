@@ -49,12 +49,19 @@ jobs:
       - name: 🌐 Setup Chrome
         uses: browser-actions/setup-chrome@v1
 
-      - name: 🔍 Debug Chrome path
+      - name: 🔍 Locate Chrome binary
+        id: find-chrome
         run: |
-          echo "Chrome path from action: ${{ steps.setup-chrome.outputs.chrome-path }}"
-          ls -la "${{ steps.setup-chrome.outputs.chrome-path }}" || echo "File not found!"
-          "${{ steps.setup-chrome.outputs.chrome-path }}" --version || echo "Cannot execute!"
+          CHROME_BIN=$(find /opt/hostedtoolcache/setup-chrome -type f -name "chrome" | head -1)
+          if [ -z "$CHROME_BIN" ]; then
+            echo "Chrome binary not found!"
+            exit 1
+          fi
+          echo "Found: $CHROME_BIN"
+          "$CHROME_BIN" --version
+          echo "path=$CHROME_BIN" >> "$GITHUB_OUTPUT"
 
       - name: 🚀 Lighthouse CI (Performance Budgets)
-        run: |
-          npx lhci autorun
+        run: npx lhci autorun
+        env:
+          CHROME_PATH: ${{ steps.find-chrome.outputs.path }}
