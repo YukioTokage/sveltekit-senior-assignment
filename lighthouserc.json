@@ -1,15 +1,39 @@
 {
 	"ci": {
 		"collect": {
-			"staticDistDir": "./build",
-			"url": ["http://localhost:4173/"]
+			"startServerCommand": "npm run preview",
+			"startServerReadyPattern": "Local:",
+			"url": [
+				"http://localhost:4173/",
+				"http://localhost:4173/blog/example-post-slug",
+				"http://localhost:4173/dashboard/items"
+			],
+			"numberOfRuns": 3,
+			"settings": {
+				"formFactor": "mobile",
+				"throttlingMethod": "simulate",
+				"screenEmulation": {
+					"mobile": true,
+					"width": 412,
+					"height": 823,
+					"deviceScaleFactor": 2.625
+				},
+				"throttling": {
+					"rttMs": 150,
+					"throughputKbps": 1638.4,
+					"cpuSlowdownMultiplier": 4
+				}
+			}
 		},
 		"assert": {
-			"preset": "lighthouse:recommended",
 			"assertions": {
-				"largest-contentful-paint": ["error", { "maxNumericValue": 2500 }],
+				"largest-contentful-paint": ["error", { "maxNumericValue": 2000 }],
 				"cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }],
-				"interactive": ["error", { "maxNumericValue": 3000 }]
+				"total-blocking-time": ["error", { "maxNumericValue": 200 }],
+				"categories:performance": ["error", { "minScore": 0.95 }],
+				"categories:accessibility": ["error", { "minScore": 0.95 }],
+				"categories:seo": ["error", { "minScore": 0.95 }],
+				"categories:best-practices": ["error", { "minScore": 0.95 }]
 			}
 		}
 	}
