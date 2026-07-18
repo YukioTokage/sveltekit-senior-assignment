@@ -1,11 +1,18 @@
 import { json } from '@sveltejs/kit';
 import postsData from '$lib/server/mocks/posts.json';
+import { building } from '$app/environment';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ url }) => {
-	const page = Number(url.searchParams.get('page')) || 1;
-	const limit = Number(url.searchParams.get('limit')) || 6;
-	const lang = (url.searchParams.get('lang') || 'en') as 'en' | 'de';
+	let page = 1;
+	let limit = 6;
+	let lang = 'en' as 'en' | 'de';
+
+	if (!building) {
+		page = Number(url.searchParams.get('page'));
+		limit = Number(url.searchParams.get('limit'));
+		lang = (url.searchParams.get('lang') || 'en') as 'en' | 'de';
+	}
 
 	const sortedPosts = [...postsData].sort((a, b) => {
 		return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
