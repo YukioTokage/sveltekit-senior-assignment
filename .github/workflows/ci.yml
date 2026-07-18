@@ -49,6 +49,12 @@ jobs:
       - name: 🌐 Setup Chrome
         uses: browser-actions/setup-chrome@v1
 
+      - name: 🔍 Debug Chrome path
+        run: |
+          echo "Chrome path from action: ${{ steps.setup-chrome.outputs.chrome-path }}"
+          ls -la "${{ steps.setup-chrome.outputs.chrome-path }}" || echo "File not found!"
+          "${{ steps.setup-chrome.outputs.chrome-path }}" --version || echo "Cannot execute!"
+
       - name: 🚀 Lighthouse CI (Performance Budgets)
         run: |
           npx lhci autorun
