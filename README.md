@@ -8,7 +8,7 @@ A modern web application built with [SvelteKit](https://kit.svelte.dev/), featur
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (with forms & typography plugins)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Localization (i18n)**: [ParaglideJS](https://inlang.com/m/gerre34r/library-inlang-paraglideJs)
-- **Testing**: 
+- **Testing**:
   - [Playwright](https://playwright.dev/) for E2E and performance budget tests
   - [Vitest](https://vitest.dev/) for unit testing
 - **CI/CD Quality**: Lighthouse CI (`@lhci/cli`), ESLint, Prettier, Husky
@@ -16,6 +16,7 @@ A modern web application built with [SvelteKit](https://kit.svelte.dev/), featur
 ## Getting Started
 
 ### Prerequisites
+
 Make sure you have Node.js (v20+) installed.
 
 ### Installation
@@ -38,17 +39,17 @@ npm run dev -- --open
 
 ## Available Commands
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start the development server |
-| `npm run build` | Build the project for production |
-| `npm run preview` | Preview the production build locally |
-| `npm run check` | Run `svelte-check` and TypeScript type checking |
-| `npm run lint` | Run ESLint and Prettier checks |
-| `npm run format` | Auto-format code with Prettier |
-| `npm run test` | Run both Unit and E2E tests |
-| `npm run test:unit` | Run unit tests with Vitest |
-| `npm run test:e2e` | Run end-to-end tests with Playwright |
+| Command               | Description                                                      |
+| --------------------- | ---------------------------------------------------------------- |
+| `npm run dev`         | Start the development server                                     |
+| `npm run build`       | Build the project for production                                 |
+| `npm run preview`     | Preview the production build locally                             |
+| `npm run check`       | Run `svelte-check` and TypeScript type checking                  |
+| `npm run lint`        | Run ESLint and Prettier checks                                   |
+| `npm run format`      | Auto-format code with Prettier                                   |
+| `npm run test`        | Run both Unit and E2E tests                                      |
+| `npm run test:unit`   | Run unit tests with Vitest                                       |
+| `npm run test:e2e`    | Run end-to-end tests with Playwright                             |
 | `npm run test:budget` | Run JS bundle size budget tests (fails if bundles exceed limits) |
 
 ## Project Structure
