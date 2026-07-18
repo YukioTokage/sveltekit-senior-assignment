@@ -46,6 +46,9 @@ jobs:
       - name: 🎭 E2E Tests (Playwright)
         run: npm run test:e2e
 
+      - name: 🌐 Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+
       - name: 🚀 Lighthouse CI (Performance Budgets)
         run: |
           npx lhci autorun
