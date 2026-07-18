@@ -1,42 +1,84 @@
-# sv
+# BoT Test Project
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A modern web application built with [SvelteKit](https://kit.svelte.dev/), featuring server-side rendering, localization, comprehensive testing, and performance budget monitoring.
 
-## Creating a project
+## Tech Stack
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Framework**: [SvelteKit](https://kit.svelte.dev/) (Svelte 5)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (with forms & typography plugins)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Localization (i18n)**: [ParaglideJS](https://inlang.com/m/gerre34r/library-inlang-paraglideJs)
+- **Testing**: 
+  - [Playwright](https://playwright.dev/) for E2E and performance budget tests
+  - [Vitest](https://vitest.dev/) for unit testing
+- **CI/CD Quality**: Lighthouse CI (`@lhci/cli`), ESLint, Prettier, Husky
 
-```sh
-# create a new project
-npx sv create my-app
+## Getting Started
+
+### Prerequisites
+Make sure you have Node.js (v20+) installed.
+
+### Installation
+
+Clone the repository and install the dependencies:
+
+```bash
+npm install
 ```
 
-To recreate this project with the same configuration:
+### Development Server
 
-```sh
-# recreate this project
-npx sv@0.16.2 create --template minimal --types ts --add prettier eslint vitest="usages:component,unit" playwright tailwindcss="plugins:typography,forms" sveltekit-adapter="adapter:auto" paraglide="languageTags:en, de+demo:no" --install npm .
-```
+Start the development server:
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
+# or open automatically in the browser:
 npm run dev -- --open
 ```
 
-## Building
+## Available Commands
 
-To create a production version of your app:
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run build` | Build the project for production |
+| `npm run preview` | Preview the production build locally |
+| `npm run check` | Run `svelte-check` and TypeScript type checking |
+| `npm run lint` | Run ESLint and Prettier checks |
+| `npm run format` | Auto-format code with Prettier |
+| `npm run test` | Run both Unit and E2E tests |
+| `npm run test:unit` | Run unit tests with Vitest |
+| `npm run test:e2e` | Run end-to-end tests with Playwright |
+| `npm run test:budget` | Run JS bundle size budget tests (fails if bundles exceed limits) |
 
-```sh
-npm run build
+## Project Structure
+
+```text
+├── src/
+│   ├── app.html         # Main HTML template
+│   ├── hooks.server.ts  # Server-side hooks
+│   ├── lib/             # Shared components, utilities, and states
+│   │   ├── components/  # UI components
+│   │   ├── paraglide/   # Auto-generated i18n runtime
+│   │   ├── state/       # Global application states
+│   │   └── utils/       # Helper functions
+│   └── routes/          # SvelteKit file-based routing
+│       ├── (app)/       # Dashboard/authenticated routes
+│       └── (marketing)/ # Public-facing routes
+├── tests/               # Playwright E2E and budget tests
+├── messages/            # i18n translation files (inlang)
+├── lighthouserc.json    # Lighthouse CI configuration
+└── tailwind.config.ts   # Tailwind CSS configuration
 ```
 
-You can preview the production build with `npm run preview`.
+## Performance Budgets
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+This project enforces strict JavaScript bundle size limits per route to ensure optimal load times (LCP/TTI). These are automatically verified using Playwright. To run the budget checks:
+
+```bash
+npm run test:budget
+```
+
+## License
+
+This project is proprietary and confidential.
