@@ -43,6 +43,7 @@
 		<Select
 			value={page.url.searchParams.get('status') || 'all'}
 			onchange={(e) => updateFilter('status', e.currentTarget.value)}
+			aria-label="Status Select"
 		>
 			<option value="all">{m['dashboard.items.filter.status.all']()}</option>
 			<option value="active">{m['dashboard.items.filter.status.active']()}</option>
@@ -58,6 +59,7 @@
 		<Select
 			value={page.url.searchParams.get('sortBy') || 'updatedAt'}
 			onchange={(e) => updateFilter('sortBy', e.currentTarget.value)}
+			aria-label="Sort Select"
 		>
 			<option value="updatedAt">{m['dashboard.items.filter.sort.updatedAt']()}</option>
 			<option value="budget">{m['dashboard.items.filter.sort.budget']()}</option>

@@ -13,6 +13,7 @@
 	<Button
 		variant="ghost"
 		size="icon"
+		aria-label="Open Sidemenu"
 		class="md:hidden md:mr-0 mr-auto text-muted-foreground hover:text-foreground"
 		onclick={onMenuClick}
 	>

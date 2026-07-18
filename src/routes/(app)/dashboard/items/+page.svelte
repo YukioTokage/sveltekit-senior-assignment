@@ -18,6 +18,7 @@
 	import ErrorDialog from '$lib/components/modals/ErrorDialog.svelte';
 	import PlusIcon from '$lib/components/icons/PlusIcon.svelte';
 	import TableToolbar from '$lib/components/collections/tables/dashboard/TableToolbar.svelte';
+	import HeadMeta from '$lib/components/layout/HeadMeta.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -30,6 +31,8 @@
 		isCreateDialogOpen: false
 	});
 </script>
+
+<HeadMeta title={m['dashboard.items.title']()} />
 
 <div class="space-y-6">
 	<div class="flex items-start md:items-center flex-col md:flex-row justify-between">
