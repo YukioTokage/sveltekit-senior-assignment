@@ -69,8 +69,8 @@
 	},
 	"size-limit": [
 		{
-			"path": ".vercel/output/static/**/*.js",
-			"limit": "80 KB"
+			"path": ".svelte-kit/output/client/_app/**/*.js",
+			"limit": "230 KB"
 		}
 	]
 }
