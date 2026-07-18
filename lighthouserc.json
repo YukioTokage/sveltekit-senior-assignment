@@ -5,7 +5,7 @@
 			"startServerReadyPattern": "Local:",
 			"url": [
 				"http://localhost:4173/",
-				"http://localhost:4173/blog/example-post-slug",
+				"http://localhost:4173/blog/sub-second-lcp-on-a-content-site",
 				"http://localhost:4173/dashboard/items"
 			],
 			"numberOfRuns": 3,

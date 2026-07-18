@@ -8,7 +8,7 @@ const routes: RouteBudget[] = [
 	{ path: '/', name: 'home', limitKB: 80 },
 	{ path: '/search', name: 'search', limitKB: 80 },
 	{ path: '/blog', name: 'blog-index', limitKB: 80 },
-	{ path: '/blog/example-post-slug', name: 'blog-post', limitKB: 80 },
+	{ path: '/blog/sub-second-lcp-on-a-content-site', name: 'blog-post', limitKB: 80 },
 	{ path: '/login', name: 'login', limitKB: 80 },
 
 	// dashboard — 150 KB
