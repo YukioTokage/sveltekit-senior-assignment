@@ -40,12 +40,11 @@ jobs:
       - name: 🏗️ Build Project
         run: npm run build
 
+      - name: ⚖️ Check JS budget per route (gzip)
+        run: npx playwright test tests/budget.spec.ts
+
       - name: 🎭 E2E Tests (Playwright)
         run: npm run test:e2e
-
-      - name: ⚖️ Check Bundle Size (< 80KB limit)
-        run: |
-          npx size-limit
 
       - name: 🚀 Lighthouse CI (Performance Budgets)
         run: |
