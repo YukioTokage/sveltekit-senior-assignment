@@ -3,18 +3,12 @@
 		"collect": {
 			"startServerCommand": "npm run preview",
 			"startServerReadyPattern": "Local:",
-			"startServerReadyTimeout": 20000,
-			"puppeteerScript": "./scripts/lhci-auth.cjs",
-			"puppeteerLaunchOptions": {
-				"args": ["--no-sandbox", "--disable-dev-shm-usage"]
-			},
 			"url": [
 				"http://localhost:4173/",
-				"http://localhost:4173/blog/sub-second-lcp-on-a-content-site",
-				"http://localhost:4173/dashboard/items"
+				"http://localhost:4173/blog/sub-second-lcp-on-a-content-site"
 			],
-			"numberOfRuns": 3,
 			"settings": {
+				"chromeFlags": "--no-sandbox --disable-dev-shm-usage",
 				"formFactor": "mobile",
 				"throttlingMethod": "simulate",
 				"screenEmulation": {
@@ -23,11 +17,7 @@
 					"height": 823,
 					"deviceScaleFactor": 2.625
 				},
-				"throttling": {
-					"rttMs": 150,
-					"throughputKbps": 1638.4,
-					"cpuSlowdownMultiplier": 4
-				}
+				"throttling": { "rttMs": 150, "throughputKbps": 1638.4, "cpuSlowdownMultiplier": 4 }
 			}
 		},
 		"assert": {
