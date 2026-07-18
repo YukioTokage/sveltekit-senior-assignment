@@ -3,6 +3,7 @@
 		"collect": {
 			"startServerCommand": "npm run preview",
 			"startServerReadyPattern": "Local:",
+			"puppeteerScript": "./scripts/lhci-auth.js",
 			"url": [
 				"http://localhost:4173/",
 				"http://localhost:4173/blog/sub-second-lcp-on-a-content-site",

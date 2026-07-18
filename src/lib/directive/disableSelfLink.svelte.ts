@@ -11,17 +11,15 @@ export const disableSelfLink: Action<HTMLAnchorElement> = (node) => {
 	}
 
 	function setButtonState(): void {
-		node.removeAttribute('href');
 		node.setAttribute('aria-current', 'page');
 		node.style.cursor = 'default';
+		node.style.pointerEvents = 'none';
 	}
 
 	function setLinkState(): void {
-		if (originalHref !== null) {
-			node.setAttribute('href', originalHref);
-		}
 		node.removeAttribute('aria-current');
 		node.style.cursor = '';
+		node.style.pointerEvents = '';
 	}
 
 	const cleanup = $effect.root(() => {

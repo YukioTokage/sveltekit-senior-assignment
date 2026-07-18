@@ -15,7 +15,10 @@ export default {
 				foreground: 'hsl(var(--foreground) / <alpha-value>)',
 				primary: {
 					DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
-					foreground: 'hsl(var(--primary-foreground) / <alpha-value>)'
+					foreground: {
+						DEFAULT: 'hsl(var(--primary-foreground) / <alpha-value>)',
+						tint: 'hsl(var(--primary-tint-foreground) / <alpha-value>)'
+					}
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary) / <alpha-value>)',

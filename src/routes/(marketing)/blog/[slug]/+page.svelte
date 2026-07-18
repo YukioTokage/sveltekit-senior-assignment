@@ -41,7 +41,7 @@
 			<div class="flex flex-wrap gap-2 mb-4">
 				{#each post.tags as tag (tag)}
 					<span
-						class="inline-flex items-center rounded-md bg-primary/20 px-3 py-1 text-xs font-semibold text-primary backdrop-blur-sm"
+						class="inline-flex items-center rounded-md bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary-foreground-tint"
 					>
 						{tag}
 					</span>

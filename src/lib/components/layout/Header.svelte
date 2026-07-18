@@ -76,18 +76,24 @@
 				aria-label="Language switcher"
 			>
 				{#each locales as locale (locale)}
-					<a
-						href={localizedResolve(pathname, { locale })}
-						data-sveltekit-reload
-						use:disableSelfLink
-						aria-current={locale === currentLang ? 'true' : undefined}
-						class="rounded px-2.5 py-1 text-xs font-semibold uppercase transition-colors
-                        {locale === currentLang
-							? 'bg-background text-foreground shadow-sm'
-							: 'text-muted-foreground hover:text-foreground'}"
-					>
-						{locale}
-					</a>
+					{#if locale === currentLang}
+						<button
+							aria-current="true"
+							class="rounded px-2.5 py-1 text-xs font-semibold uppercase transition-colors bg-background text-foreground shadow-sm"
+						>
+							{locale}
+						</button>
+					{:else}
+						<a
+							href={localizedResolve(pathname, { locale })}
+							data-sveltekit-reload
+							use:disableSelfLink
+							aria-current={undefined}
+							class="rounded px-2.5 py-1 text-xs font-semibold uppercase transition-colors text-muted-foreground hover:text-foreground"
+						>
+							{locale}
+						</a>
+					{/if}
 				{/each}
 			</div>
 
