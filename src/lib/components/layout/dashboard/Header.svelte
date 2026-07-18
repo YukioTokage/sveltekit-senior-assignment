@@ -28,6 +28,7 @@
 				<p class="text-sm font-medium text-foreground">{user.email}</p>
 				<p class="text-xs text-muted-foreground capitalize">{user.role}</p>
 			</div>
+
 			<div
 				class="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm uppercase border border-primary/20"
 			>
