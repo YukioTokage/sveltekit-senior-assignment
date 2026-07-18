@@ -15,6 +15,7 @@ test('dashboard items — Lighthouse audit', async () => {
 	await page.waitForURL('/dashboard');
 
 	await page.goto('/dashboard/items');
+	await page.screenshot({ path: 'debug-before-audit.png', fullPage: true });
 
 	await playAudit({
 		page,

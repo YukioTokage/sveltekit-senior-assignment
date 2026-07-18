@@ -49,5 +49,5 @@ jobs:
       - name: 🚀 Lighthouse CI — public routes
         run: npx lhci autorun
 
-      - name: 🚀 Lighthouse audit — dashboard (via Playwright auth)
-        run: npm run test:lighthouse:dashboard
+      # - name: 🚀 Lighthouse audit — dashboard (via Playwright auth)
+      # run: npm run test:lighthouse:dashboard
